@@ -9,13 +9,7 @@ type AvatarProps = {
   className?: string;
 };
 
-export const Avatar: React.FC<AvatarProps> = ({
-  className,
-  src,
-  alt,
-  size = 48,
-  fallbackText,
-}) => {
+export const Avatar: React.FC<AvatarProps> = ({ className, src, alt, size = 48, fallbackText }) => {
   const { base, image, text } = avatarStyle();
   const initials = fallbackText;
 
@@ -28,13 +22,7 @@ export const Avatar: React.FC<AvatarProps> = ({
       aria-label={alt ?? fallbackText}
     >
       {src ? (
-        <Image
-          src={src}
-          alt={alt ?? fallbackText ?? "Avatar"}
-          width={size}
-          height={size}
-          className={image()}
-        />
+        <Image src={src} alt={alt ?? fallbackText ?? "Avatar"} width={size} height={size} className={image()} />
       ) : (
         <span className={text()}>{initials}</span>
       )}

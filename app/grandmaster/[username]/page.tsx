@@ -1,5 +1,5 @@
 import { getGrandMasterByUsername } from "@/entities/gm/model";
-import { GrandMasterCard } from "@/features/grand-master-card";
+import { ProfileCard } from "@/features/profile-card";
 
 type GrandMasterProfileProps = {
   params: Promise<{ username: string }>;
@@ -7,8 +7,7 @@ type GrandMasterProfileProps = {
 
 const GrandMasterProfile = async ({ params }: GrandMasterProfileProps) => {
   const { username } = await params;
-  const gm = await getGrandMasterByUsername(username);
-
-  return <GrandMasterCard gm={gm} />;
+  const { displayName, avatarUrl, title } = await getGrandMasterByUsername(username);
+  return <ProfileCard username={username} avatarUrl={avatarUrl} displayName={displayName} title={title} />;
 };
 export default GrandMasterProfile;

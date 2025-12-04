@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
-
 import "./globals.css";
-import { Footer } from "@/widgets/footer";
+import type { Metadata } from "next";
 import { Header } from "@/widgets/header/header";
 import { Main } from "@/widgets/main";
 
@@ -17,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
+      <body className="antialiased">
         <Header />
         <Main>{children}</Main>
         {/* <Footer /> */}

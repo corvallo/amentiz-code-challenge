@@ -24,12 +24,9 @@ export const badgeStyle = tv({
     dark:aria-invalid:ring-destructive/40 
     aria-invalid:border-destructive 
     overflow-hidden 
-
-
-    border-transparent 
+    border-foreground/30
     bg-primary 
     text-primary-foreground 
     [a&]:hover:bg-primary/90
-
   `,
 });

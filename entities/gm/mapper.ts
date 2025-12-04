@@ -1,9 +1,7 @@
 import type { ChessApiPlayer } from "@/shared/api/chess";
 import type { GrandMaster } from "./types";
 
-export const mapChessApiPlayerToGrandMaster = (
-  raw: ChessApiPlayer,
-): GrandMaster => ({
+export const mapChessApiPlayerToGrandMaster = (raw: ChessApiPlayer): GrandMaster => ({
   id: raw.player_id,
   username: raw.username,
   displayName: raw.name ?? raw.username,
