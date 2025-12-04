@@ -5,7 +5,9 @@ export const paginationStyle = tv({
 });
 
 export const paginationLinkStyle = tv({
-  base: `px-3 py-1 rounded border hover:bg-neutral-100/10 flex gap-1 items-center`,
+  base: `px-3 py-1 rounded border flex gap-1 items-center text-foreground border-foreground/30
+    hover:bg-foreground/5 hover:border-foreground/50
+    transition-colors duration-200 ease-out`,
   variants: {
     disabled: {
       true: "opacity-40 cursor-default pointer-events-none",

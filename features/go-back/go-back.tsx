@@ -9,7 +9,7 @@ type GoBackProps = {
 export function GoBack({ className, ...props }: GoBackProps) {
   return (
     <Link {...props} className={goBackStyle({ className })}>
-      <ArrowLeft />
+      <ArrowLeft width={18} height={18} />
       Go Back
     </Link>
   );
