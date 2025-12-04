@@ -12,5 +12,9 @@ export const headetStyle = tv({
         items-center
         px-6
         justify-between
+        sticky
+        top-0
+        z-50
+        bg-background
     `,
 });

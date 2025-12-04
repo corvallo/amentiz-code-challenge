@@ -1,5 +1,7 @@
 import { badgeStyle } from "./badge.style";
 
-export const Badge: React.FC<React.ComponentProps<"span">> = ({ className, ...props }) => {
+type BadgeProps = React.ComponentProps<"span">;
+
+export function Badge({ className, ...props }: BadgeProps) {
   return <span className={badgeStyle({ className })} {...props} />;
-};
+}

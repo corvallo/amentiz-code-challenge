@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { paginationLinkStyle, paginationStyle } from "./pagination.style";
 
@@ -22,13 +23,13 @@ export const Pagination = ({ page, totalPages, basePath = "" }: PaginationProps)
   return (
     <nav className={paginationStyle()}>
       <Link href={buildHref(basePath, page - 1)} className={paginationLinkStyle({ disabled: !hasPrev })}>
-        Prev
+        <ChevronLeft width={18} height={18} /> Prev
       </Link>
-      <span>
+      <span className="md:px-3">
         Page {page} of {totalPages}
       </span>
       <Link href={buildHref(basePath, page + 1)} className={paginationLinkStyle({ disabled: !hasNext })}>
-        Next
+        Next <ChevronRight width={18} height={18} />
       </Link>
     </nav>
   );

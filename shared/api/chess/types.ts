@@ -10,6 +10,7 @@ export type ChessApiPlayer = {
   avatar?: string;
   country?: string;
   last_online?: number;
+  joined?: number;
   status?: string;
   league?: string;
   title: string;

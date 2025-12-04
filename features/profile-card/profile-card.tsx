@@ -11,7 +11,7 @@ type ProfileCardProps = {
   hasViewProfileAction?: boolean;
 };
 
-export const ProfileCard = async ({
+export const ProfileCard = ({
   username,
   displayName,
   avatarUrl,
@@ -25,13 +25,15 @@ export const ProfileCard = async ({
       <Card>
         <CardHeader>
           <CardTitle className={cardTitle()}>
-            <Avatar src={avatarUrl} fallbackText={username} />
+            <Avatar src={avatarUrl} fallbackText={displayName} />
             <Badge title={`Role ${title}`}>
               <Trophy /> {title}
             </Badge>
           </CardTitle>
         </CardHeader>
-        <CardContent>{displayName}</CardContent>
+        <CardContent>
+          <span className="font-medium">{displayName}</span>
+        </CardContent>
         <CardFooter className={cardFooter()}>
           {hasViewProfileAction && (
             <div className={profileAction()}>

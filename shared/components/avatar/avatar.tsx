@@ -9,9 +9,16 @@ type AvatarProps = {
   className?: string;
 };
 
-export const Avatar: React.FC<AvatarProps> = ({ className, src, alt, size = 48, fallbackText }) => {
+const getInitials = (name?: string): string => {
+  if (!name) return "?";
+  const parts = name.trim().split(" ");
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+};
+
+export function Avatar({ className, src, alt, size = 48, fallbackText }: AvatarProps) {
   const { base, image, text } = avatarStyle();
-  const initials = fallbackText;
+  const initials = getInitials(fallbackText);
 
   const dimension = `${size}px`;
   return (
@@ -28,4 +35,4 @@ export const Avatar: React.FC<AvatarProps> = ({ className, src, alt, size = 48, 
       )}
     </div>
   );
-};
+}

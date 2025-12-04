@@ -6,6 +6,7 @@ export type GrandMaster = {
   avatarUrl: string | null;
   countryCode: string | null;
   lastOnline: number | null;
+  joined: number | null;
   title: string;
 };
 

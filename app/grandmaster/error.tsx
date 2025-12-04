@@ -11,7 +11,7 @@ export default function GmError({ error, reset }: Props) {
       <h1 className="text-xl font-semibold">Error loading Grandmasters</h1>
       <p className="text-sm text-muted-foreground">There might be a temporary issue with the Chess.com API.</p>
       <pre className="text-xs bg-muted p-2 rounded">{error.message}</pre>
-      <button type="button" onClick={() => reset()} className="px-3 py-1 rounded bg-black text-white text-sm">
+      <button type="button" onClick={() => reset()} className="px-3 py-1 rounded border hover:bg-neutral-100/10">
         Retry
       </button>
     </div>
