@@ -22,6 +22,8 @@ Finally, I focused on the interface—building modular server components, wiring
 - Custom LRU Cache (server-side)
 - Concurrency-limited batching for API calls
 
+> Note: I’m following a lightweight take on [Feature-Sliced Design](https://feature-sliced.design/): the project still separates entities, features, widgets, and shared utilities, but I’ve tailored the hierarchy to fit the scope and pace of this code challenge.
+
 ---
 
 #  Architecture & Technical Decisions
@@ -204,5 +206,4 @@ CHESS_API_BASE=https://api.chess.com/pub
         │     Chess.com API        │
         └──────────────────────────┘
 ```
-
 
