@@ -139,7 +139,7 @@ This ensures consistent navigation even from:
 
 ---
 
-## 8️⃣ Error Handling
+## Error Handling
 
 - retry strategy for API rate-limit errors  
 - safe error boundaries on profiles  
@@ -148,7 +148,20 @@ This ensures consistent navigation even from:
 
 ---
 
-#  Architectural Diagram
+
+## Environment Variables
+
+GM_PAGE_SIZE=99
+
+GM_CACHE_CAPACITY=300
+
+GM_CACHE_TTL_SECONDS=300
+
+CHESS_API_BASE=https://api.chess.com/pub
+
+
+
+##  Architectural Diagram
 
 
 ````
@@ -190,16 +203,6 @@ This ensures consistent navigation even from:
         ┌──────────────────────────┐
         │     Chess.com API        │
         └──────────────────────────┘
+```
 
 
-
-
-## Environment Variables
-
-GM_PAGE_SIZE=99
-
-GM_CACHE_CAPACITY=300
-
-GM_CACHE_TTL_SECONDS=300
-
-CHESS_API_BASE=https://api.chess.com/pub
