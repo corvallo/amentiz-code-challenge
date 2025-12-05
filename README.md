@@ -151,6 +151,7 @@ This ensures consistent navigation even from:
 #  Architectural Diagram
 
 
+````
         ┌──────────────────────────┐
         │         Browser          │
         │   Navigates to a page    │
@@ -189,6 +190,8 @@ This ensures consistent navigation even from:
         ┌──────────────────────────┐
         │     Chess.com API        │
         └──────────────────────────┘
+
+```
 
 
 ## Environment Variables
