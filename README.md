@@ -191,7 +191,7 @@ This ensures consistent navigation even from:
         │     Chess.com API        │
         └──────────────────────────┘
 
-```
+
 
 
 ## Environment Variables
