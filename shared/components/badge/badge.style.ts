@@ -8,7 +8,7 @@ export const badgeStyle = tv({
     rounded-full 
     border 
     px-2 
-    py-0.5 
+    py-1
     text-xs 
     font-medium 
     w-fit 

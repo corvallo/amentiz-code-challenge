@@ -18,3 +18,6 @@ export const headetStyle = tv({
         bg-background
     `,
 });
+export const logoStyle = tv({
+  base: "flex gap-4 items-center focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-foreground",
+});

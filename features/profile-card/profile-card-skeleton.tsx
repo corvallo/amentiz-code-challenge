@@ -2,18 +2,19 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/c
 
 export const ProfileCardSkeleton = () => {
   return (
-    <Card className="animate-pulse">
-      <CardHeader>
+    <Card className="h-full flex flex-col">
+      <CardHeader className="animate-blur-out">
         <CardTitle className="flex items-start justify-between gap-4">
-          <div className="h-12 w-12 rounded-md bg-neutral-200/20" />
-          <div className="h-6 w-20 rounded-full bg-neutral-200/20" />
+          <div className="h-12 w-12 rounded-md bg-foreground/10" />
+          <div className="h-7 w-20 rounded-full bg-foreground/10" />
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="h-4 w-3/4 rounded bg-neutral-200/20" />
+      <CardContent className="animate-blur-out">
+        <div className="h-6 w-3/5 rounded bg-foreground/10" />
+        <div className="h-6 w-3/4 rounded bg-foreground/10" />
       </CardContent>
-      <CardFooter className="justify-end">
-        <div className="h-4 w-24 rounded bg-neutral-200/20" />
+      <CardFooter className="animate-blur-out justify-end">
+        <div className="h-5 w-24 rounded bg-foreground/10" />
       </CardFooter>
     </Card>
   );

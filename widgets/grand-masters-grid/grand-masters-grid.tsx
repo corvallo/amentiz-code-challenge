@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { getGrandMasters } from "@/entities/gm/model";
 import { ProfileCard } from "@/features/profile-card";
+import { grandMasterListStyle } from "./grand-master-grid.style";
 
 type GrandMastersGridProps = {
   page: number;
@@ -7,17 +9,25 @@ type GrandMastersGridProps = {
 };
 export async function GrandMastersGrid({ page, pageSize }: GrandMastersGridProps) {
   const { items } = await getGrandMasters(page - 1, pageSize);
+  const { grid, link } = grandMasterListStyle();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className={grid()}>
       {items.map(({ username, id, displayName, title, avatarUrl }) => (
-        <ProfileCard
+        <Link
           key={id}
-          username={username}
-          avatarUrl={avatarUrl}
-          displayName={displayName}
-          title={title}
-          hasViewProfileAction={true}
-        />
+          href={{ pathname: `/grandmaster/${username}`, query: page > 1 ? { from: String(page) } : undefined }}
+          aria-label={`Open profile of ${displayName}`}
+          title={`Open profile of ${displayName}`}
+          className={link()}
+        >
+          <ProfileCard
+            username={username}
+            avatarUrl={avatarUrl}
+            displayName={displayName}
+            title={title}
+            hasViewProfileAction={true}
+          />
+        </Link>
       ))}
     </div>
   );

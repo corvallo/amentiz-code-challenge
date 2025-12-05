@@ -5,6 +5,17 @@
   --foreground: #171717;
 }
 
+@keyframes blurOut {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,6 +23,7 @@
   --font-mono: var(--font-geist-mono);
   --font-weight-base: 500;
   --font-weight-heading: 700;
+  --animate-blur-out: blurOut 300ms ease-out forwards;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,5 +47,9 @@
   h5,
   h6 {
     @apply font-heading;
+  }
+
+  .card-blur-in {
+    animation: blurOut 300ms ease-out forwards;
   }
 }

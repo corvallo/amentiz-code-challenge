@@ -1,28 +1,21 @@
 "use client";
 
-type Props = {
+import { Button } from "@/shared/components";
+
+type ErrorProps = {
   error: Error & { digest?: string };
   reset: () => void;
 };
 
-export default function GmError({ error, reset }: Props) {
+export default function GmError({ error, reset }: ErrorProps) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-6 w-full">
       <h1 className="text-xl font-semibold">Error loading Grandmasters</h1>
-      <p className="text-sm text-muted-foreground">There might be a temporary issue with the Chess.com API.</p>
-      <pre className="text-xs bg-muted p-2 rounded">{error.message}</pre>
-      <button
-        type="button"
-        onClick={() => reset()}
-        className={`gap-2 px-3 py-1 border rounded 
-                    text-foreground border-foreground/30
-                    hover:bg-foreground/5 hover:border-foreground/50
-                    transition-colors duration-200 ease-out
-                    cursor-pointer
-        `}
-      >
-        Retry
-      </button>
+      <p className="text-sm text-foreground">There might be a temporary issue with the Chess.com API.</p>
+      <pre className="text-xs bg-foreground/10 p-6 rounded whitespace-pre-wrap wrap-break-word shadow-md shadow-foreground/10">
+        {error.message}
+      </pre>
+      <Button onClick={() => reset()}>Retry</Button>
     </div>
   );
 }

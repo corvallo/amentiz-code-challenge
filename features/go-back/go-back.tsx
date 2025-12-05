@@ -1,6 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import Link, { type LinkProps } from "next/link";
-import { goBackStyle } from "./go-back.style";
+import { Button } from "@/shared/components";
 
 type GoBackProps = {
   className?: string;
@@ -8,9 +8,9 @@ type GoBackProps = {
 
 export function GoBack({ className, ...props }: GoBackProps) {
   return (
-    <Link {...props} className={goBackStyle({ className })}>
+    <Button href={props.href} as={Link} title="Go back" className={className}>
       <ArrowLeft width={18} height={18} />
       Go Back
-    </Link>
+    </Button>
   );
 }

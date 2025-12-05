@@ -2,17 +2,18 @@ import { tv } from "tailwind-variants";
 
 export const cardStyle = tv({
   base: `
-    bg-background 
+    bg-foreground/10
     text-foreground 
     flex 
     flex-col 
     gap-6 
+    transition
+    hover:scale-101
     rounded-xl 
-    border 
-    border-foreground/30
     py-6 
     shadow-md
     shadow-foreground/5
+    outline-none
   `,
 });
 
