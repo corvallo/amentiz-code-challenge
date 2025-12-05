@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getGrandMastersCount } from "@/entities/gm/model";
 import { Pagination } from "@/shared/components/pagination/pagination";
@@ -7,6 +8,12 @@ import { GrandMastersGrid } from "@/widgets/grand-masters-grid/grand-masters-gri
 
 type GrandMastersPageProps = {
   searchParams?: Promise<{ page?: string }>;
+};
+
+export const metadata: Metadata = {
+  title: "Chess Grandmasters | GM Wiki",
+  description: "Discover every Chess.com Grandmaster.",
+  keywords: ["chess grandmaster list", "chess.com gm", "chess wiki", "gm profiles"],
 };
 
 export default async function GrandMastersPage({ searchParams }: GrandMastersPageProps) {

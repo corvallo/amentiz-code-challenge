@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getGrandMasterByUsername } from "@/entities/gm/model";
 import { GoBack } from "@/features/go-back/go-back";
 import { LastTimeOnline } from "@/features/last-time-online/last-time-online";
@@ -30,3 +31,23 @@ const GrandMasterProfile = async ({ params, searchParams }: GrandMasterProfilePr
   );
 };
 export default GrandMasterProfile;
+
+export async function generateMetadata({ params }: { params: Promise<{ username: string }> }): Promise<Metadata> {
+  const { username } = await params;
+  try {
+    const gm = await getGrandMasterByUsername(username);
+    return {
+      title: `${gm.displayName} (${gm.username}) | Chess GM Profile`,
+      description: `Profile page for ${gm.displayName}, titled ${gm.title}, including a live clock since last online on Chess.com.`,
+      keywords: ["chess grandmaster", gm.username, gm.displayName, "chess profile"],
+      alternates: {
+        canonical: `/grandmaster/${gm.username}`,
+      },
+    };
+  } catch {
+    return {
+      title: `${username} | Chess GM Profile`,
+      description: `View the Chess.com profile for grandmaster ${username}.`,
+    };
+  }
+}
