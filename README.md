@@ -1,19 +1,18 @@
-# ♘ Chess Grandmasters Wiki — Code Challenge
+# ♘ Chess Grandmasters Wiki — Amenitiz Code Challenge  
 
-This project implements a Chess Grandmasters Wiki using the Chess.com public API.  
-It is built with a server-first philosophy using modern React and Next.js features.
+## Solution by Francesco Stallo
 
-The solution demonstrates:
+Although the brief didn’t demand production-ready code, I intentionally built the project so it could evolve into a production deployment: 
+everything is driven by explicit env vars, typed configuration, and a clear separation of concerns, making it easy to containerize or ship later.  
 
-- clean architectural thinking  
-- advanced handling of external APIs with rate limits  
-- SSR pagination with smooth skeleton transitions  
-- performance-driven data strategy (caching + batching)  
-- modular and scalable code design  
+For the proposed code challenge I approached the problem from a server-first perspective: I started by modelling the data and the core use cases (listing, profile, live clock). 
+Then I designed the fetch/cache pipeline to stay within Chess.com’s rate limits (batching, concurrency control, retries). 
+Finally, I focused on the interface—building modular server components, wiring Suspense skeletons, and keeping navigation predictable. Each section below details these choices and how they work together.
+
 
 ---
 
-## 🚀 Tech Stack
+##  Tech Stack
 
 - Next.js 16 (App Router, Server Components)
 - React 19
@@ -25,7 +24,7 @@ The solution demonstrates:
 
 ---
 
-# 🏗 Architecture & Technical Decisions
+#  Architecture & Technical Decisions
 
 ##  Server-First Data Fetching
 
@@ -44,21 +43,21 @@ Benefits:
 
 ---
 
-## 2️⃣ Path-Based Pagination With Automatic Skeleton Loading
+##  Query Pagination With Suspense Skeletons
 
-Instead of using query parameters, pagination uses URL segments so that every page change triggers a segment transition.  
-This enables a loading component that appears on every navigation without requiring client JavaScript.
+Pagination relies on the `page` query parameter (for example `/grandmaster?page=4`).  
+Each navigation re-renders the grid inside a keyed `<Suspense>` boundary which briefly shows a skeleton while the new data resolves server-side.
 
 Advantages:
 
-- smooth UX without hydration cost  
-- no useTransition or client components needed  
-- clean separation of concerns  
-- zero waterfall on navigation  
+- smooth UX even without client-side pagination logic  
+- no `useTransition` or client fetches  
+- predictable refresh on every navigation  
+- retains full SSR/streaming benefits  
 
 ---
 
-## 3️⃣ Performance Strategy: LRU Cache + Concurrency Limiting
+##  Performance Strategy: LRU Cache + Concurrency Limiting
 
 The Chess.com API rate-limits aggressive parallel requests and often returns 429 errors.
 
@@ -80,7 +79,7 @@ Together, these techniques stabilize performance and reduce API pressure.
 
 ---
 
-## 4️⃣ Robust Configuration System
+##  Robust Configuration System
 
 A custom config layer validates environment values, applies safe defaults, and guarantees stability.
 
@@ -94,7 +93,7 @@ Example constraints:
 
 ---
 
-## 5️⃣ Architecture Overview (FSD-Inspired)
+##  Architecture Overview (FSD-Inspired)
 
 The project follows a modular structure inspired by Feature-Sliced Design.  
 Key layers include:
@@ -108,21 +107,20 @@ This separation improves scalability, testability, and maintainability.
 
 ---
 
-## 6️⃣ Skeleton Loading Without Client Components
+##  Skeleton Loading Without Client Components
 
-Each paginated page has its own loading component.  
-Next.js automatically displays it whenever the corresponding segment is resolving.
+The grids are wrapped in `<Suspense>`; when the `page` query changes, React briefly shows the fallback while the server stream finishes.
 
 This enables:
 
-- lightweight transitions  
-- full SSR rendering  
+- lightweight transitions without client state  
+- full SSR/streaming behavior  
 - predictable UX  
-- zero client-side overhead  
+- zero client-side loading hooks  
 
 ---
 
-## 7️⃣ Navigation Strategy (“Go Back”)
+## Navigation Strategy (“Go Back”)
 
 Browser history cannot be used server-side, so the list page passes a lightweight context reference through search parameters.
 
@@ -150,5 +148,55 @@ This ensures consistent navigation even from:
 
 ---
 
-# 🧩 Architectural Diagram
+#  Architectural Diagram
 
+
+        ┌──────────────────────────┐
+        │         Browser          │
+        │   Navigates to a page    │
+        └───────────────┬──────────┘
+                        │
+                Server Request
+                        │
+┌───────────────────────▼──────────────────────────┐
+│             Application Router                   │
+│   Resolves the matching route segment            │
+│   Shows a loading state while awaiting data      │
+└───────────────────────┬──────────────────────────┘
+                        │
+                        ▼
+        ┌──────────────────────────┐
+        │      Domain Logic        │
+        │  Pagination, batching,   │
+        │  mapping, validations    │
+        └───────────────┬──────────┘
+                        │
+                        ▼
+        ┌──────────────────────────┐
+        │        LRU Cache         │
+        │   Reuse recent results   │
+        │   TTL-based invalidation │
+        └───────────────┬──────────┘
+                        │
+                        ▼
+        ┌──────────────────────────┐
+        │   API Integration Layer  │
+        │  Fetching from Chess API │
+        │  Retry and backoff logic │
+        └───────────────┬──────────┘
+                        │
+                        ▼
+        ┌──────────────────────────┐
+        │     Chess.com API        │
+        └──────────────────────────┘
+
+
+## Environment Variables
+
+GM_PAGE_SIZE=99
+
+GM_CACHE_CAPACITY=300
+
+GM_CACHE_TTL_SECONDS=300
+
+CHESS_API_BASE=https://api.chess.com/pub
