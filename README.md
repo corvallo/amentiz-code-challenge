@@ -63,16 +63,16 @@ The Chess.com API rate-limits aggressive parallel requests and often returns 429
 
 To avoid this:
 
-### ✔ Custom LRU Cache
+###  Custom LRU Cache
 - configurable size  
 - configurable time-to-live  
 - stores GM profile responses  
 - prevents repeated expensive calls  
 
-### ✔ Concurrency-limited batching
+###  Concurrency-limited batching
 Large batches of profile fetches are processed with a worker-pool strategy to avoid overloading the Chess.com API.
 
-### ✔ Retry/backoff handling for 429
+###  Retry/backoff handling for 429
 The API integration layer gracefully retries failing requests with controlled backoff.
 
 Together, these techniques stabilize performance and reduce API pressure.
