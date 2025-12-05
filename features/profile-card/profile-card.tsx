@@ -20,7 +20,7 @@ export const ProfileCard = ({
   const { cardTitle, cardFooter, profileAction } = profileCardStyle();
 
   return (
-    <Card className="h-full flex flex-col ">
+    <Card className="h-full flex flex-col">
       <CardHeader className="animate-blur-out">
         <CardTitle className={cardTitle()}>
           <Avatar src={avatarUrl} fallbackText={displayName} />
@@ -31,20 +31,13 @@ export const ProfileCard = ({
       </CardHeader>
       <CardContent className="animate-blur-out">
         <div className="flex flex-col gap-1">
-          <span className="text-sm flex gap-1 items-center">
+          <h4 className="text-sm flex gap-1 items-center">
             <User width={12} height={12} />
             {username}
-          </span>
-          <span className="font-medium">{displayName}</span>
+          </h4>
+          <h3 className="font-medium">{displayName}</h3>
         </div>
       </CardContent>
-      <CardFooter className={cardFooter({ className: "animate-blur-out" })}>
-        {hasViewProfileAction && (
-          <div className={profileAction()}>
-            View Profile <ChevronRight width={18} height={18} />
-          </div>
-        )}
-      </CardFooter>
     </Card>
   );
 };

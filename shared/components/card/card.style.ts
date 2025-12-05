@@ -7,8 +7,6 @@ export const cardStyle = tv({
     flex 
     flex-col 
     gap-6 
-    transition
-    hover:scale-101
     rounded-xl 
     py-6 
     shadow-md

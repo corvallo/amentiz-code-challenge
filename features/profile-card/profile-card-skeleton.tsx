@@ -13,9 +13,6 @@ export const ProfileCardSkeleton = () => {
         <div className="h-6 w-3/5 rounded bg-foreground/10" />
         <div className="h-6 w-3/4 rounded bg-foreground/10" />
       </CardContent>
-      <CardFooter className="animate-blur-out justify-end">
-        <div className="h-5 w-24 rounded bg-foreground/10" />
-      </CardFooter>
     </Card>
   );
 };

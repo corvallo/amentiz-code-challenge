@@ -12,5 +12,5 @@ export function ElapsedTime({ lastOnline }: ElapsedTimeeProps) {
     return () => clearInterval(id);
   }, [lastOnline]);
 
-  return <span>{elapsedTime} ago</span>;
+  return <>{elapsedTime}</>;
 }

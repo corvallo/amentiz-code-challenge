@@ -11,6 +11,8 @@ export const mapChessApiPlayerToGrandMaster = (raw: ChessApiPlayer): GrandMaster
   lastOnline: raw.last_online ?? null,
   title: raw.title,
   joined: raw.joined ?? null,
+  followers: raw.followers ?? null,
+  league: raw.league ?? null,
 });
 
 const extractCountryCode = (countryUrl?: string): string | null => {

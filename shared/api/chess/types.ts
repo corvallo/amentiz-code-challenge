@@ -14,4 +14,5 @@ export type ChessApiPlayer = {
   status?: string;
   league?: string;
   title: string;
+  followers?: number;
 };

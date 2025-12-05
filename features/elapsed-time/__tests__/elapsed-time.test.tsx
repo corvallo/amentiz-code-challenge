@@ -17,19 +17,19 @@ describe("ElapsedTime", () => {
 
   it("renders placeholder when lastOnline is null", () => {
     render(<ElapsedTime lastOnline={null} />);
-    expect(screen.getByText("00:00:00 ago")).toBeTruthy();
+    expect(screen.getByText("00:00:00")).toBeTruthy();
   });
 
   it("updates the elapsed time every second", () => {
     const lastOnline = Math.floor(fixedDate.getTime() / 1000) - 30;
     render(<ElapsedTime lastOnline={lastOnline} />);
 
-    expect(screen.getByText("00:00:30 ago")).toBeTruthy();
+    expect(screen.getByText("00:00:30")).toBeTruthy();
 
     act(() => {
       vi.advanceTimersByTime(2000);
     });
 
-    expect(screen.getByText("00:00:32 ago")).toBeTruthy();
+    expect(screen.getByText("00:00:32")).toBeTruthy();
   });
 });

@@ -8,6 +8,8 @@ export type GrandMaster = {
   lastOnline: number | null;
   joined: number | null;
   title: string;
+  followers: number | null;
+  league: string | null;
 };
 
 export interface GetGrandMasterResponse {

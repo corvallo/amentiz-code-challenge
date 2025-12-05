@@ -1,26 +1,20 @@
-// entities/gm/__tests__/model.test.ts
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import * as chessApi from "@/shared/api/chess";
+import { grandMastersDetailCache, grandMastersUsernameCache } from "../cache";
 import { getGrandMasterByUsername, getGrandMasters } from "../model";
-import type { GrandMaster } from "../types";
 
-vi.mock("@/entities/gm/cache", async () => {
-  const { LRUCache } = await vi.importActual<typeof import("@/shared/lib/lru")>("@/shared/lib/lru");
-  const cache = new LRUCache<string, GrandMaster>(200);
-  return {
-    grandmastersCache: cache,
-    __resetCache: () => cache["map"].clear(),
-  };
-});
-
-const { __resetCache } = vi.mocked(await import("@/entities/gm/cache")) as unknown as { __resetCache: () => void };
+const clearCache = (cache: unknown) => {
+  const map: Map<string, unknown> | undefined = (cache as { map?: Map<string, unknown> }).map;
+  map?.clear();
+};
 
 const mockPlayers = Array.from({ length: 5 }, (_, i) => `player${i}`);
 
 describe("getGrandMasters", () => {
   beforeEach(() => {
     vi.restoreAllMocks();
-    __resetCache();
+    clearCache(grandMastersUsernameCache);
+    clearCache(grandMastersDetailCache);
 
     vi.spyOn(chessApi, "fetchGMUsernames").mockResolvedValue(mockPlayers);
     vi.spyOn(chessApi, "fetchPlayer").mockImplementation(async (username) => ({
