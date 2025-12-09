@@ -161,7 +161,39 @@ GM_CACHE_TTL_SECONDS=300
 
 CHESS_API_BASE=https://api.chess.com/pub
 
+# Security Note – CVE-2025-55182 (React2Shell)
 
+Following the disclosure of CVE-2025-55182 (React2Shell), I performed a full dependency review to ensure that this project is not affected by the vulnerability.
+
+Result: the application is not vulnerable.
+
+## Technical details
+
+The CVE affects only the following packages:
+
+- react-server-dom-webpack
+- react-server-dom-parcel
+- react-server-dom-turbopack
+
+in versions 19.0, 19.1.0, 19.1.1, and 19.2.0.
+
+This project does not use any of these packages.
+
+
+The installed React/Next.js versions are already patched:
+
+- next@16.0.7
+- react@19.2.1
+- react-dom@19.2.1
+
+As an additional verification step, I used Vercel’s official React2Shell detection tool:
+
+[https://github.com/vercel-labs/fix-react2shell-next](https://github.com/vercel-labs/fix-react2shell-next)
+
+The tool confirmed that no vulnerable RSC packages are present.
+
+Some automated scanners may still report a false positive because they only detect “React 19 + Next.js”
+without checking whether the vulnerable RSC packages are actually present.
 
 ##  Architectural Diagram
 
